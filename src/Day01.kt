@@ -1,39 +1,37 @@
-package day1
-
-import printResult
-import readInput
-
 fun main() {
     fun part1(input: List<String>): Int {
-        var increments = 0;
-
-        if (input.size < 2) {
-            return increments;
-        }
+        var increments = 0
 
         for (i in 1 until input.size) {
-            if (input[i].toInt() > input[i- 1].toInt()) {
-                increments++;
+            if (input[i].toInt() > input[i - 1].toInt()) {
+                increments++
             }
         }
 
-        return increments;
+        return increments
     }
 
     fun part2(input: List<String>): Int {
-        var increments = 0;
+        var increments = 0
 
-        if (input.size < 2) {
-            return increments;
-        }
+        var previousRun = 0
+        for (i in input.indices) {
+            if (i + 2 < input.size) {
+                var currentRun = 0
+                // could also do "currentRun += input[i].toInt() + input[i + 1].toInt() + input[i + 2].toInt()" instead
+                for (j in i..(i + 2)) {
+                    currentRun += input[j].toInt()
+                }
 
-        for (i in 1 until input.size) {
-            if (input[i].toInt() > input[i- 1].toInt()) {
-                increments++;
+                if (i > 0 && currentRun > previousRun) {
+                    increments++
+                }
+
+                previousRun = currentRun
             }
         }
 
-        return increments;
+        return increments
     }
 
     // Check implementation using provided example
